@@ -10,8 +10,8 @@ const { verifyUser } = require('../middleware/authMiddleware');
 
 router.get('/', getAllPosts); //working
 router.get('/:id', getPostById); //working
-router.post('/', createPost); //working
-router.put('/:id', updatePost); //working
-router.delete('/:id', deletePost); //working
+router.post('/',verifyUser, createPost); //working
+router.put('/:id',verifyUser, updatePost); //working
+router.delete('/:id',verifyUser, deletePost); //working
 
 module.exports = router;

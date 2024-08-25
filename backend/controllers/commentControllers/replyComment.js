@@ -1,4 +1,5 @@
 const Comment = require("../../models/Comment");
+const ReplyComment = require("../../models/ReplyComment");
 
 exports.replyComment = async (req, res) => {
     try {
@@ -9,10 +10,11 @@ exports.replyComment = async (req, res) => {
       if (!comment) {
         return res.status(404).json({ message: 'Comment not found' });
       }
-      const newReply = {
+      const newReply =new ReplyComment( {
         userId: req.user._id,
         content,
-      };
+      });
+      await newReply.save()
       comment.replies.push(newReply);
       await comment.save();
       res.status(201).json(comment);
